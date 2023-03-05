@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Авторизация</title>
+  </head>
+  <body>
+    <main class="sign_container">
+      <div class="sign_logo">
+        <div class="sign_logo_circle">
+          <img src="/logo.png" alt="Логотип" />
+        </div>
+        <div class="sign_text">Авторизация</div>
+      </div>
+      <form action="">
+        <div class="sign_form">
+          <input
+            type="email"
+            name="auth_email"
+            id="email"
+            onchange="toggleButton()"
+            placeholder="Email Address *"
+            required
+          />
+          <input
+            type="password"
+            name="auth_pass"
+            id="password"
+            onchange="toggleButton()"
+            placeholder="Password *"
+            required
+          />
+        </div>
+        <div class="check">
+          <input
+            type="checkbox"
+            id="checkRemember"
+            onchange="rememberPassword()"
+          />
+          <label for="checkRemember">Запомнить меня</label>
+        </div>
+        <button class="submit" id="sign_button" onclick="pageReload()" disabled>
+          ВОЙТИ
+        </button>
+      </form>
+      <div class="additional">
+        <button class="link" onclick="forgotPassword()">Я забыл пароль</button>
+        <button class="link" onclick="registration()">Зарегистрироваться</button>
+      </div>
+    </main>
+  </body>
+
+  <style>
+    .sign_container {
+      padding-top: 30px;
+      position: relative;
+      width: 270px;
+      height: auto;
+      margin: 0 auto;
+      font-family: arial;
+    }
+    .sign_logo {
+      margin-bottom: 20px;
+    }
+    .sign_logo img {
+      display: block;
+      height: 13px;
+    }
+    .sign_logo_circle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      width: 25px;
+      height: 25px;
+      background-color: #8e37a8;
+      border-radius: 50%;
+    }
+    .sign_text {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+    }
+    .sign_form input {
+      width: 260px;
+      height: 35px;
+      padding: 0 5px;
+      margin-bottom: 15px;
+      font-size: 12px;
+      border: 1px solid lightgray;
+      border-radius: 3px;
+      outline: blue;
+    }
+    .sign_form input:focus {
+      outline: none;
+      border: 2px solid lightblue;
+    }
+
+    .submit {
+      display: block;
+      margin: 0 auto;
+      width: 270px;
+      height: 25px;
+      margin-top: 20px;
+      border-radius: 5px;
+      border: none;
+      background-color: #3975cb;
+      color: white;
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    button[disabled] {
+      background-color: #95bbf1;
+    }
+    .check input {
+      margin-left: 0;
+      vertical-align: top;
+    }
+    .check label {
+      font-size: 12px;
+    }
+    .additional {
+      margin-top: 15px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .link {
+      padding: 0;
+      display: block;
+      background-color: transparent;
+      border: none;
+      text-decoration: underline;
+      color: #3975cb;
+      font-size: 10px;
+      cursor: pointer
+    }
+  </style>
+
+  <script>
+    const rememberPassword = () => {
+      const checkBoxStatus = document.getElementById("checkRemember");
+      checkBoxStatus.checked ? alert("Запомнил!") : alert("Забыл!");
+    };
+
+    const toggleButton = () => {
+      const emailFilled = document.getElementById("email").value;
+      const passFilled = document.getElementById("password").value;
+      if (email && password) {
+        document.getElementById("sign_button").disabled = false;
+      } else {
+        document.getElementById("sign_button").disabled = true;
+      }
+    };
+
+    const pageReload = () => {
+      const reloadPage = () => {
+        location.reload();
+      };
+      setTimeout(reloadPage, 3000);
+    };
+
+    const forgotPassword = () => {
+      prompt("Введите Ваш E-mail");
+    };
+    const registration = () => {
+      let email;
+      let passwordFirst;
+      let passwordConfirm;
+      while (!email) {
+        email = prompt("Введите E-mail");
+        if (email === null) return;
+        if (email === "") alert("Пожалуйста, введите ваш email");
+      }
+      while (!passwordFirst) {
+        passwordFirst = prompt("Введите пароль");
+        if (passwordFirst === null) return;
+        if (passwordFirst === "") alert("Пожалуйста, введите пароль");
+      }
+      while (!password || passwordFirst !== passwordConfirm) {
+        passwordConfirm = prompt("Повторите пароль");
+        if (passwordFirst === null) return;
+        if (passwordConfirm === "") alert("Пожалуйста, повторите пароль");
+        if (passwordConfirm && passwordFirst !== passwordConfirm)
+          alert("Пароли не совпадают!");
+      }
+      alert("Вы успешно зарегистрированы!");
+    };
+  </script>
+</html>
